@@ -95,11 +95,11 @@ class Static:
             
             # Windows is fucking stupid why would you use backslashes
             paths = {
-                "config": environ["APPDATA"] + "\\adr",
-                "data": environ["APPDATA"] + "\\adr\data"
+                "config": environ["APPDATA"] + "\\tadr",
+                "data": environ["APPDATA"] + "\\tadr\data"
             } if os == "win" else {
-                "config": home + "/.config/adr",
-                "data": home + "/.adr/data"
+                "config": home + "/.config/tadr",
+                "data": home + "/.tadr/data"
             }
                 
             #Create any missing paths/directories
