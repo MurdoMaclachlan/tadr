@@ -17,7 +17,6 @@
     Contact me at murdo@maclachlans.org.uk
 """
 
-
 from colored import fg, attr
 from os import environ, mkdir
 from os.path import expanduser, isdir
