@@ -17,7 +17,6 @@
     Contact me at murdo@maclachlans.org.uk
 """
 
-
 # CLASSES
 from .classes import Log
 from .classes import Static
