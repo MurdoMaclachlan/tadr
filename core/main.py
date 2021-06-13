@@ -26,7 +26,7 @@ def tadr(Log, messageIDs, Static):
     
     Log.new("Initialising Reddit instance...")
     reddit = praw.Reddit(
-        user_agent=Static.OS+":auto-done-replier:v"+Static.VERSION+" (by /u/MurdoMaclachlan)",
+        user_agent=Static.OS+":tor-auto-done-replier:v"+Static.VERSION+" (by /u/MurdoMaclachlan)",
         **getCredentials(Log, Static)
     )
     
