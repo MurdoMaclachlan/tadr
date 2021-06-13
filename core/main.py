@@ -40,7 +40,7 @@ def tadr(Log, messageIDs, Static):
             # Main check, replying to message if necessary
             # The one second delay should ensure only 1 reply is ever needed
             if checkMessage(Log, message, messageIDs, Static):
-                Log.new(f"Replying to message at: {message.permalink}")
+                Log.new(f"Replying to message at: {message.context}")
                 if Static.VERBOSE: Log.Notify.Notification.new(f"Replying to message at: {message.id}").show()
                 sleep(1)
                 message.reply(Static.REPLY)
