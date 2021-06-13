@@ -22,7 +22,7 @@ from .classes import Log
 from .classes import Static
 
 # MAIN
-from .main import adr
+from .main import tadr
 
 # MISC
 from .misc import checkMessage
