@@ -17,7 +17,6 @@
     Contact me at murdo@maclachlans.org.uk
 """
 
-
 import praw
 from time import sleep
 from .misc import checkMessage, getCredentials
