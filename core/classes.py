@@ -25,6 +25,9 @@ from time import time
 from typing import List, NoReturn
 from .misc import getTime
 
+global VERSION
+VERSION = "1.0-dev6-20210613"
+
 # For console logging
 class Log:
     
@@ -83,7 +86,7 @@ class Static:
         self.SPLITTER = "."
         self.START_TIME = time()
         self.VERBOSE = True
-        self.VERSION = "1.0-dev5-20210613"
+        self.VERSION = VERSION
     
     # Defines save paths for config and data based on the user's OS    
     def definePaths(self, home: str, os: str, Log: object) -> List:
