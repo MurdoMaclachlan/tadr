@@ -60,7 +60,7 @@ def getCredentials(Log: object, Static: object) -> Dict:
     
     # If praw.ini is missing, warn the user
     except (FileNotFoundError, KeyError):
-        Log.new(Log.warning("praw.ini not found; please set up praw.ini and then re-run ADR. See README.md for instructions."))
+        Log.new(Log.warning("praw.ini not found; please set up praw.ini and then re-run TADR. See README.md for instructions."))
         exit()
 
 # Returns current time in human readable format
