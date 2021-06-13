@@ -59,7 +59,7 @@ def getCredentials(Log: object, Static: object) -> Dict:
         return dict(credentials["tadr"])
     
     # If praw.ini is missing, warn the user
-    except FileNotFoundError:
+    except (FileNotFoundError, KeyError):
         Log.new(Log.warning("praw.ini not found; please set up praw.ini and then re-run ADR. See README.md for instructions."))
         exit()
 
