@@ -83,7 +83,7 @@ class Static:
         self.SPLITTER = "."
         self.START_TIME = time()
         self.VERBOSE = True
-        self.VERSION = "1.0-dev4-20210613"
+        self.VERSION = "1.0-dev5-20210613"
     
     # Defines save paths for config and data based on the user's OS    
     def definePaths(self, home: str, os: str, Log: object) -> List:
