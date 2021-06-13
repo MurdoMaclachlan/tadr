@@ -56,7 +56,7 @@ def getCredentials(Log: object, Static: object) -> Dict:
     try:
         credentials = ConfigParser()
         credentials.read(f"{Static.PATHS['config']}/praw.ini")
-        return dict(credentials["adr"])
+        return dict(credentials["tadr"])
     
     # If praw.ini is missing, warn the user
     except FileNotFoundError:
