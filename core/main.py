@@ -21,7 +21,7 @@ import praw
 from time import sleep
 from .misc import checkMessage, getCredentials
 
-def adr(Log, messageIDs, Static):
+def tadr(Log, messageIDs, Static):
     
     
     Log.new("Initialising Reddit instance...")
