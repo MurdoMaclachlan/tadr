@@ -26,7 +26,7 @@ from typing import List, NoReturn
 from .misc import getTime
 
 global VERSION
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 # For console logging
 class Log:
