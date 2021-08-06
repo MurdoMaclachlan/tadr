@@ -46,7 +46,7 @@ class Log:
             self.WARNING = fg(warning)
 
     # Returns current time in human readable format
-    def getTime(timeToFind: float) -> str:
+    def getTime(self, timeToFind: float) -> str:
         return datetime.fromtimestamp(timeToFind).strftime("%Y-%m-%d %H:%M:%S")
     
     # Log to console, all that jazz
