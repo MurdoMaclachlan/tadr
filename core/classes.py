@@ -26,7 +26,7 @@ from time import time
 from typing import List, NoReturn
 
 global VERSION
-VERSION = "1.0.2-dev1-20210806"
+VERSION = "1.0.2"
 
 
 # For console logging
