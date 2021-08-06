@@ -18,15 +18,16 @@
 """
 
 from colored import fg, attr
+from datetime import datetime
 from os import environ, mkdir
 from os.path import expanduser, isdir
 from sys import platform
 from time import time
 from typing import List, NoReturn
-from .misc import getTime
 
 global VERSION
-VERSION = "1.0.1"
+VERSION = "1.0.2-dev1-20210806"
+
 
 # For console logging
 class Log:
@@ -43,10 +44,14 @@ class Log:
         def __init__(self: object, warning: int, reset: int) -> NoReturn:
             self.RESET = attr(reset)
             self.WARNING = fg(warning)
+
+    # Returns current time in human readable format
+    def getTime(timeToFind: float) -> str:
+        return datetime.fromtimestamp(timeToFind).strftime("%Y-%m-%d %H:%M:%S")
     
     # Log to console, all that jazz
     def new(self, message: str) -> NoReturn:
-        message = f"{getTime(time())} - {message}"
+        message = f"{self.getTime(time())} - {message}"
         self.__log.append(message)
         print(message)
     
@@ -70,6 +75,7 @@ class Log:
     def warning(self, message: str) -> str:
         return self.ConsoleColours.WARNING + "WARNING: " + message + self.ConsoleColours.RESET
 
+
 # Contains all static vars
 class Static:
     
@@ -87,8 +93,8 @@ class Static:
         self.START_TIME = time()
         self.VERBOSE = True
         self.VERSION = VERSION
-    
-    # Defines save paths for config and data based on the user's OS    
+  
+    # Defines save paths for config and data based on the user's OS
     def definePaths(self, home: str, os: str, Log: object) -> List:
         
         # Gets first 3 characters of OS
@@ -105,16 +111,16 @@ class Static:
                 "data": home + "/.tadr/data"
             }
                 
-            #Create any missing paths/directories
+            # Create any missing paths/directories
             for path in paths:
                 if not isdir(paths[path]):
                     Log.new(f"Making path: {paths[path]}")
                     for directory in paths[path].split("/")[1:]:
-                       if not isdir(paths[path].split(directory)[0] + directory):
-                           Log.new(f"Making directory: {paths[path].split(directory)[0]}{directory}")
-                           mkdir(paths[path].split(directory)[0] + directory)
+                        if not isdir(paths[path].split(directory)[0] + directory):
+                            Log.new(f"Making directory: {paths[path].split(directory)[0]}{directory}")
+                            mkdir(paths[path].split(directory)[0] + directory)
             return paths
-        
+       
         # Exit is OS is unsupported
         else:
             Log.new(Log.warning(f"Unsupported operating system: {os}, exiting."))

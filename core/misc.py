@@ -18,8 +18,8 @@
 """
 
 from configparser import ConfigParser
-from datetime import datetime
 from typing import Dict, List
+
 
 def checkMessage(Log: object, message: object, messageIDs: List, Static: object) -> bool:
     
@@ -44,10 +44,11 @@ def checkMessage(Log: object, message: object, messageIDs: List, Static: object)
         
         # Have tried re-replying; there's a problem.
         elif parentBody == Static.REPLY:
-            Log.Notify.Notification.new(f"Problematic post found.").show()
+            Log.Notify.Notification.new("Problematic post found.").show()
             Log.new(Log.warning(f"Problematic post at: {parent.url}"))
             del parent, parentBody
             return False
+
 
 # Use configparser magic to get the credentials from praw.ini
 def getCredentials(Log: object, Static: object) -> Dict:
@@ -62,7 +63,3 @@ def getCredentials(Log: object, Static: object) -> Dict:
     except (FileNotFoundError, KeyError):
         Log.new(Log.warning("praw.ini not found; please set up praw.ini and then re-run TADR. See README.md for instructions."))
         exit()
-
-# Returns current time in human readable format
-def getTime(timeToFind: float) -> str:
-    return datetime.fromtimestamp(timeToFind).strftime("%Y-%m-%d %H:%M:%S")

@@ -27,4 +27,3 @@ from .main import tadr
 # MISC
 from .misc import checkMessage
 from .misc import getCredentials
-from .misc import getTime
