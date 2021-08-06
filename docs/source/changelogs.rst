@@ -12,7 +12,7 @@ A list of changelogs for TADR, with the most recent version first. These are als
 
 **Bug Fixes**:
 
-- #1: Import error: cannot import getTime() (fixed in #2).
+- #1: Import error: cannot import ``getTime()`` (fixed in #2).
 
 1.0.1
 -----
