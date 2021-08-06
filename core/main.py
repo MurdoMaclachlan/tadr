@@ -21,8 +21,8 @@ import praw
 from time import sleep
 from .misc import checkMessage, getCredentials
 
+
 def tadr(Log, messageIDs, Static):
-    
     
     Log.new("Initialising Reddit instance...")
     reddit = praw.Reddit(
