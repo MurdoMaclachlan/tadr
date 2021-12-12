@@ -20,7 +20,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/MurdoMaclachlan/tadr",
     packages=find_packages(),
-    install_requires=["colored", "configparser", "praw>=7.5.0"],
+    install_requires=["configparser", "praw>=7.5.0"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
