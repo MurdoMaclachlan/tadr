@@ -49,7 +49,7 @@ def tadr():
     while True:
 
         # Fetch messages
-        Log.new("Checking messages...murdomaclachlan@duck.com", "INFO")
+        Log.new("Checking messages...", "INFO")
         for message in reddit.inbox.comment_replies(limit=Globals.LIMIT):
 
             # Main check, replying to message if necessary
