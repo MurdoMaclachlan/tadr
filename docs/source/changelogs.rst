@@ -3,8 +3,31 @@ Changelogs
 
 A list of changelogs for TADR, with the most recent version first. These are also available `here <https://github.com/MurdoMaclachlan/tadr/releases>`_.
 
-1.0.2 - Current Release
+2.0.0 - Current Release
 -----------------------
+
+**Functionality**
+
+- Added and enforced refresh token authentication.
+- Refactored Logger.
+
+**Cleanup/Optimisation**
+
+- Optimised ``Static.define_paths()``.
+- General optimisations for the rest of the program.
+
+**Dependencies**
+
+- Removed colored.
+- Updated praw to 7.5.0.
+
+**Documentation/Logs**
+
+- Added docstrings.
+- Updated readthedocs documentation.
+
+1.0.2
+-----
 
 **Cleanup/Optimisation**:
 

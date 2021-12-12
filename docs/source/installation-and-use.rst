@@ -8,7 +8,7 @@ Requirements
 
 In order to install TADR, you will need a version of Python installed. The program was written using 3.9, but anything 3.5 onwards should work. A minimum of 3.5 is required because that is when type-hinting, which TADR uses extensively, was added.
 
-TADR also relies on a few python packages; colored, configparser and PRAW. Any version of colored and configparser will do, but for PRAW you will need 7.1.2 or over.
+TADR also relies on a couple of python packages; configparser and PRAW. Any version of configparser will do, but for PRAW you will need 7.5.0 or over.
 
 Installation
 -------------
@@ -27,17 +27,16 @@ To install TADR,
 
     - Go to the page and scroll down until you find the bot you created. Underneath its name should be "personal use script", and below that a string of random characters. This is your client id. If you can't see a field that labeled "secret" with another, longer string of random characters after it, then click the edit button and it should appear (along with other fields you filled out when you were creating the bot).
     
-    - The praw.ini will also require your username and password, so that Reddit knows it is you trying to connect to your account. ADR does not currently support refresh tokens.
-
-Once it has been created, the contents of your praw.ini file should look something like this:::
+    - TADR will then open a tab in your browser to complete the authentication process. Once you click 'allow', it will automatically append your refresh_token to ``praw.ini``. Once fully initialised, the contents of your praw.ini file should look something like this:::
 
     [tadr]
     client_id=lI3fAkE7x82LiE
     client_secret=4lS0f4Ke1234567894NdN0tR3aL
-    username=testuser
-    password=yourpasswordhere
+    redirect_uri = http://localhost:8080/users/auth/reddit/callback
+    refresh_token = your refresh token here
 
-4. After this is set up, you should be good to run the program! Remember: ADR does not check any messages that were already there when it was started, so you will need to start it before you begin transcribing and keep it running the whole time you are doing so if you want it to catch everything.
+
+4. After this is set up, you should be good to run the program! Remember: TADR does not check any messages that were already there when it was started, so you will need to start it before you begin transcribing and keep it running the whole time you are doing so if you want it to catch everything.
 
 Updating
 ---------

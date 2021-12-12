@@ -13,10 +13,7 @@ The following is an explanation of what each configuration option does:
      - Description
    * - authors
      - Array
-     - The list of users that TADR will check messages from. Only contains "transcribersofreddit" by default.
-   * - debug
-     - Boolean
-     - Turning this option on will activate a few extra log messages to aid debugging. Set to False by default.
+     - The list of users that TADR will check messages from. Only contains "transcribersofreddit" by default.Set to False by default.
    * - limit
      - Integer
      - The number of messages TADR will retrieve each cycle, always starting with the most recent message. Set to 10 by default.

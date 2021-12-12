@@ -6,6 +6,6 @@ The following is an alphabetical list of people who have contributed directly to
 u/MurdoMaclachlan
 ^^^^^^^^^^^^^^^^^^
 
-`Website <https://murdomaclachlan.carrd.co/>`_
+`Website <https://murdomaclachlan.github.io/website>`_
 
 - Original creator and primary maintainer
