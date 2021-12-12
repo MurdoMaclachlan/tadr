@@ -3,3 +3,4 @@
 build/*
 dist/*
 tadr.egg-info/*
+.idea/*
