@@ -24,27 +24,47 @@ from time import time
 from typing import Dict, NoReturn
 
 global Globals, VERSION
-VERSION = "2.0.0-alpha-20211210"
+VERSION = "2.0.0-alpha-20211212"
 
 
-# Contains all static vars
 class Static:
+    """Class containing all static variables and config options.
+
+    Attributes:
+        - AUTHORS (list); list of users to reply to.
+        - LIMIT (int); the number of messages to look back through.
+        - LOG_UPDATES (boolean); whether or not to output log details to a file.
+        - MESSAGES (list); list of phrases to reply to.
+        - OS (str); the user's operating system.
+        - PATHS (dictionary); the locations of the data and config folders.
+        - REPLY (string); the message to reply with.
+        - SLEEP (int); the number of seconds to wait between checks.
+        - SPLITTER (str); the character to split messages by when searching.
+        - START_TIME (int); the unix timestamp at which the program started running.
+        - VERBOSE (boolean); whether or not to send desktop notifications when replying.
+        - VERSION (str); the version number of TADR.
+
+    Methods:
+        - define_paths(str, str) -> Dict[str, str]; defines the locations of the data
+        and config folders.
+    """
     def __init__(self) -> NoReturn:
         self.AUTHORS = ["transcribersofreddit"]
-        self.DEBUG = False
         self.LIMIT = 10
-        self.LOG_UPDATES = False
+        self.LOG_UPDATES = True
         self.MESSAGES = ["Sorry; I can't find your transcript post on the link"]
         self.OS = platform
         self.PATHS = self.define_paths(expanduser("~"), self.OS)
-        self.REPLY = "done -- this was an automated action; please contact me with any questions."
+        self.REPLY = (
+            "done -- this was an automated action; please contact me with any"
+            " questions."
+        )
         self.SLEEP = 10
         self.SPLITTER = "."
         self.START_TIME = time()
         self.VERBOSE = True
         self.VERSION = VERSION
 
-    # Defines save paths for config and data based on the user's OS
     def define_paths(self, home: str, os: str) -> Dict[str, str]:
         """Detects OS and defines the appropriate save paths for the config and data.
         Exits on detecting an unspported OS. Supported OS's are: Linux, MacOS, Windows.

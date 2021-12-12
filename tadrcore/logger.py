@@ -36,11 +36,11 @@ class Logger:
     2: maximum, print to console and save to log file
 
     Attributes:
-    - log (hidden, list): contains all log entries, each one an instance of LogEntry
-    - scopes (hidde, dictionary): contains all scopes and their associated values
+        - log (hidden, list): contains all log entries, each one an instance of LogEntry
+        - scopes (hidde, dictionary): contains all scopes and their associated values
 
     Methods:
-    - get(): get entries from the log
+        - get(str, str) -> Union[List[str], str]: get entries from the log
     """
     def __init__(
         self: object,
@@ -121,8 +121,7 @@ class Logger:
         No return value.
         """
         with open(
-                f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt",
-                "at+"
+            f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
         ) as log_file:
             for line in self.__log:
                 try:

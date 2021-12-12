@@ -18,38 +18,48 @@
 """
 
 from typing import List
+from .globals import Globals
+from .logger import Log
+
+global Globals, Log
 
 
 def check_message(
-    Log: object, message: object, messageIDs: List, Static: object, Notify: object
+    message: object, messageIDs: List, Notify: object
 ) -> bool:
+    """Check whether a given message should be replied to or not.
 
+    :param message: The message to check
+    :param messageIDs: The list of messages already replied to
+    :param Notify: The desktop notification manager
+
+    :return: Boolean success status
+    """
     # Avoid checking messages from before program start, or that have already been
     # checked
-    if message.created_utc < Static.START_TIME or message.id in messageIDs:
-        return False
-
-    messageIDs.append(message.id)
 
     if (
-        message.body.split(Static.SPLITTER)[0] in Static.MESSAGES
-        and message.author.name in Static.AUTHORS
+        (
+            message.created_utc > Globals.START_TIME
+            and not message.id in messageIDs
+        )
+        and message.body.split(Globals.SPLITTER)[0] in Globals.MESSAGES
+        and message.author.name in Globals.AUTHORS
     ):
+        messageIDs.append(message.id)
 
         # Declaring these variables saves on API requests and speeds up program a lot.
-        # They'll be deleted later on to ensure memory is saved, because I don't know
-        # whether or not Python does that for you.
         parent = message.parent()
         parentBody = parent.body.casefold()
 
         # Haven't tried re-replying; try.
         if parentBody == "done":
-            del parent, parentBody
             return True
 
         # Have tried re-replying; there's a problem.
-        elif parentBody == Static.REPLY:
+        elif parentBody == Globals.REPLY:
             Notify.Notification.new("Problematic post found.").show()
             Log.new(f"Problematic post at: {parent.url}", "INFO")
-            del parent, parentBody
             return False
+    else:
+        return False

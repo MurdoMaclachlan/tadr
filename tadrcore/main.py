@@ -30,13 +30,15 @@ global Globals, Log
 
 
 def tadr():
+    """
+    The main program function.
 
+    No arguments.
+
+    No return value.
+    """
     Notify.init("TADR")
-    Log.new(
-        f"Running Auto Done Replier version {Globals.VERSION} with debug set to"
-        f" {Globals.DEBUG}.",
-        "NOSCOPE"
-    )
+    Log.new(f"Running Auto Done Replier version {Globals.VERSION}.", "NOSCOPE")
 
     Log.new("Initialising Reddit instance...", "INFO")
     reddit = init()
@@ -52,7 +54,7 @@ def tadr():
 
             # Main check, replying to message if necessary
             # The one second delay should ensure only 1 reply is ever needed
-            if check_message(Log, message, messageIDs, Globals, Notify):
+            if check_message(message, messageIDs, Notify):
                 Log.new(
                     f"Replying to message at: https://www.reddit.com{message.context}",
                     "INFO"
