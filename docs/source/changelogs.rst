@@ -25,6 +25,7 @@ A list of changelogs for TADR, with the most recent version first. These are als
 
 - Added docstrings.
 - Updated readthedocs documentation.
+- Changed name of ``core`` folder to ``tadrcore`` so pip installation doesn't explode. (#3)
 
 1.0.2
 -----
