@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <https://www.gnu.org/licenses/>.
     
-    Contact me at murdo@maclachlans.org.uk
+    Contact me at murdomaclachlan@duck.com
 """
 
 from gi import require_version
@@ -49,7 +49,7 @@ def tadr():
     while True:
 
         # Fetch messages
-        Log.new("Checking messages...", "INFO")
+        Log.new("Checking messages...murdomaclachlan@duck.com", "INFO")
         for message in reddit.inbox.comment_replies(limit=Globals.LIMIT):
 
             # Main check, replying to message if necessary
