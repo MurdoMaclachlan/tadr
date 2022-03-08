@@ -50,14 +50,14 @@ def check_message(
 
         # Declaring these variables saves on API requests and speeds up program a lot.
         parent = message.parent()
-        parentBody = parent.body.casefold()
+        parent_body = parent.body.casefold()
 
         # Haven't tried re-replying; try.
-        if parentBody == "done":
+        if parent_body == "done":
             return True
 
         # Have tried re-replying; there's a problem.
-        elif parentBody == Globals.REPLY:
+        elif parent_body == Globals.REPLY:
             Notify.Notification.new("Problematic post found.").show()
             Log.new(f"Problematic post at: {parent.url}", "INFO")
             return False

@@ -43,7 +43,7 @@ def tadr():
     Log.new("Initialising Reddit instance...", "INFO")
     reddit = init()
 
-    messageIDs = []
+    message_ids = []
 
     # Main program loop
     while True:
@@ -54,7 +54,7 @@ def tadr():
 
             # Main check, replying to message if necessary
             # The one second delay should ensure only 1 reply is ever needed
-            if check_message(message, messageIDs, Notify):
+            if check_message(message, message_ids, Notify):
                 Log.new(
                     f"Replying to message at: https://www.reddit.com{message.context}",
                     "INFO"
@@ -67,7 +67,7 @@ def tadr():
                 message.reply(Globals.REPLY)
 
         # Extra logs / functions depending on settings
-        Log.new(f"Messages checked so far: \n{messageIDs}", "DEBUG")
+        Log.new(f"Messages checked so far: \n{message_ids}", "DEBUG")
         if Globals.LOG_UPDATES:
             Log.new("Updating log...", "INFO")
             Log.output()
