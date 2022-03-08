@@ -3,8 +3,15 @@ Changelogs
 
 A list of changelogs for TADR, with the most recent version first. These are also available `here <https://github.com/MurdoMaclachlan/tadr/releases>`_.
 
-2.0.0 - Current Release
------------------------
+Unreleased
+----------
+
+**Documentation**
+
+- Changed camelCase variable names to snake_case. (@MurdoMaclachlan)
+
+2.0.0
+-----
 
 **Functionality**
 
