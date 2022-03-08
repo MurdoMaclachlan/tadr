@@ -25,12 +25,12 @@ global Globals, Log
 
 
 def check_message(
-    message: object, messageIDs: List, Notify: object
+    message: object, message_ids: List, Notify: object
 ) -> bool:
     """Check whether a given message should be replied to or not.
 
     :param message: The message to check
-    :param messageIDs: The list of messages already replied to
+    :param message_ids: The list of messages already replied to
     :param Notify: The desktop notification manager
 
     :return: Boolean success status
@@ -41,12 +41,12 @@ def check_message(
     if (
         (
             message.created_utc > Globals.START_TIME
-            and not message.id in messageIDs
+            and not message.id in message_ids
         )
         and message.body.split(Globals.SPLITTER)[0] in Globals.MESSAGES
         and message.author.name in Globals.AUTHORS
     ):
-        messageIDs.append(message.id)
+        message_ids.append(message.id)
 
         # Declaring these variables saves on API requests and speeds up program a lot.
         parent = message.parent()
