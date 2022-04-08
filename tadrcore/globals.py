@@ -24,7 +24,7 @@ from time import time
 from typing import Dict, NoReturn
 
 global Globals, VERSION
-VERSION = "2.0.1.1"
+VERSION = "2.0.1.2"
 
 
 class Static:
@@ -52,7 +52,7 @@ class Static:
         self.AUTHORS = ["transcribersofreddit"]
         self.LIMIT = 10
         self.LOG_UPDATES = True
-        self.MESSAGES = ["Sorry; I can't find your transcript post on the link"]
+        self.MESSAGES = ["⛔ Sorry, I **can't find** your transcription on on the post"]
         self.OS = platform
         self.PATHS = self.define_paths(expanduser("~"), self.OS)
         self.REPLY = (
