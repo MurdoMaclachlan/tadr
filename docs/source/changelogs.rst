@@ -6,8 +6,7 @@ A list of changelogs for TADR, with the most recent version first. These are als
 Unreleased
 ----------
 
-**Documentation**
-
+- Switched to detecting u/transcribersofreddit's new failure message. (@MurdoMaclachlan)
 - Changed camelCase variable names to snake_case. (@MurdoMaclachlan)
 
 2.0.0
