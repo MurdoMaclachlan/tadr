@@ -18,6 +18,10 @@
 """
 
 from datetime import datetime
+from gi import require_version
+require_version("Notify", "0.7")
+from gi.repository import Notify
+from gi.repository.GLib import GError
 from time import time
 from typing import List, NoReturn, Union
 from .globals import Globals
@@ -47,6 +51,8 @@ class Logger:
         debug=0, error=2, fatal=2, info=1, warning=2
     ) -> NoReturn:
         self.__log = []
+        self.__notify = Notify
+        self.__notify.init("Clone Finder")
         self.__scopes = {
             "DEBUG":   debug,   # information for debugging the program
             "ERROR":   error,   # errors the program can recover from
@@ -110,25 +116,21 @@ class Logger:
         else:
             print("ERROR: Bad method passed to Logger.get_time().")
 
-    def output(self: object) -> NoReturn:
-        """Write all log entries with scopes set to save to a log file in a data folder
-        in the working directory, creating the folder and file if they do not exist.
-        The log files are marked with the date, so each new day, a new file will be
-        created.
+    def notify(self: object, message: str) -> None:
+        """Display a desktop notification with a given message.
 
-        No arguments.
+        This method implements a try-except to catch a GError I've been experiencing
+        recently and can't find the cause of. Something in GLib seems to crash whenever
+        I display a notification with a Python notification library, despite the fact
+        that the notification goes through successfully anyway. Since it has no bearing
+        on the program function, this code ignores the error.
 
-        No return value.
+        :param message: The message to display in the notification.
         """
-        with open(
-            f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
-        ) as log_file:
-            for line in self.__log:
-                try:
-                    if self.__scopes[line.scope] == 2:
-                        log_file.write(line.rendered + "\n")
-                except KeyError:
-                    pass
+        try:
+            self.__notify.Notification.new(message).show()
+        except GError:
+            pass
 
     def new(
             self: object,
@@ -155,15 +157,31 @@ class Logger:
                 return True
             # If the scope's value is 1 or greater it should be printed
             elif self.__scopes[scope]:
-                print(
-                    entry.rendered
-                    if not do_not_print
-                    else None
-                )
+                print(entry.rendered if not do_not_print else None)
                 return True
         else:
             self.new("Unknown scope passed to Logger.new()", "WARNING")
         return False
+
+    def output(self: object) -> NoReturn:
+        """Write all log entries with scopes set to save to a log file in a data folder
+        in the working directory, creating the folder and file if they do not exist.
+        The log files are marked with the date, so each new day, a new file will be
+        created.
+
+        No arguments.
+
+        No return value.
+        """
+        with open(
+            f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
+        ) as log_file:
+            for line in self.__log:
+                try:
+                    if self.__scopes[line.scope] == 2:
+                        log_file.write(line.rendered + "\n")
+                except KeyError:
+                    pass
 
 
 class LogEntry:

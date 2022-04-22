@@ -6,8 +6,12 @@ A list of changelogs for TADR, with the most recent version first. These are als
 Unreleased
 ----------
 
+As of this version, setuptools 57.0.0+ and PyGObject 3.42+ are now explicitly required, having been implicit requirements before.
+
+- Moved Notify to the Logger, allowing easy catching of any errors originating from GLib. (@MurdoMaclachlan)
 - Switched to detecting u/transcribersofreddit's new failure message. (@MurdoMaclachlan)
 - Changed camelCase variable names to snake_case. (@MurdoMaclachlan)
+- Fixed alphabetical order of methods in the Logger. (@MurdoMaclachlan)
 
 2.0.0
 -----

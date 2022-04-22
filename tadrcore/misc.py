@@ -24,14 +24,11 @@ from .logger import Log
 global Globals, Log
 
 
-def check_message(
-    message: object, message_ids: List, Notify: object
-) -> bool:
+def check_message(message: object, message_ids: List) -> bool:
     """Check whether a given message should be replied to or not.
 
     :param message: The message to check
     :param message_ids: The list of messages already replied to
-    :param Notify: The desktop notification manager
 
     :return: Boolean success status
     """
@@ -58,7 +55,7 @@ def check_message(
 
         # Have tried re-replying; there's a problem.
         elif parent_body == Globals.REPLY:
-            Notify.Notification.new("Problematic post found.").show()
+            Log.notify("Problematic post found.")
             Log.new(f"Problematic post at: {parent.url}", "INFO")
             return False
     else:

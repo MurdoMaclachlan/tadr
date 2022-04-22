@@ -24,7 +24,7 @@ from time import time
 from typing import Dict, NoReturn
 
 global Globals, VERSION
-VERSION = "2.0.1.3"
+VERSION = "2.0.1.4"
 
 
 class Static:
