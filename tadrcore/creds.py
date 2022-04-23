@@ -28,10 +28,7 @@ global Globals, Log
 def add_refresh_token(creds: Dict, refresh_token: str) -> None:
     """Appends a given Reddit refresh token to praw.ini.
 
-    Arguments:
-    - refresh_token (string)
-
-    No return value.
+    :param refresh_token:  The Reddit refresh token to append.
     """
     creds["refresh_token"] = refresh_token
     dump_credentials(creds)
@@ -40,9 +37,7 @@ def add_refresh_token(creds: Dict, refresh_token: str) -> None:
 def create_credentials() -> bool:
     """Creates a new ini file based on user input.
 
-    No arguments.
-
-    Returns: boolean success status.
+    :return: boolean success status.
     """
     Log.new(
         "praw.ini missing, incomplete or incorrect. It will need to be created.",
@@ -63,10 +58,8 @@ def create_credentials() -> bool:
 def dump_credentials(creds: Dict) -> None:
     """Outputs updated Reddit credentials to praw.ini.
 
-    Arguments:
-    - creds (dictionary)
-
-    Returns: boolean success status.
+    :param creds:  A dictionary containing the credentials.
+    :return: boolean success status.
     """
     Parser = ConfigParser()
     Parser["tcf"] = creds
@@ -78,9 +71,7 @@ def dump_credentials(creds: Dict) -> None:
 def get_credentials() -> Dict:
     """Retrieves Reddit credentials from praw.ini.
 
-    No arguments.
-
-    Returns: dictionary containing credentials.
+    :return: A dictionary containing credentials.
     """
     try:
         Parser = ConfigParser()

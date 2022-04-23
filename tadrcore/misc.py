@@ -29,12 +29,10 @@ def check_message(message: object, message_ids: List) -> bool:
 
     :param message: The message to check
     :param message_ids: The list of messages already replied to
-
     :return: Boolean success status
     """
     # Avoid checking messages from before program start, or that have already been
     # checked
-
     if (
         (
             message.created_utc > Globals.START_TIME

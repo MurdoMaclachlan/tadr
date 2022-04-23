@@ -27,12 +27,7 @@ global Globals, Log
 
 
 def tadr() -> None:
-    """
-    The main program function.
-
-    No arguments.
-
-    No return value.
+    """The main program function.
     """
     Log.new(f"Running Auto Done Replier version {Globals.VERSION}.", "NOSCOPE")
 

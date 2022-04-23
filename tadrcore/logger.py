@@ -35,15 +35,15 @@ class Logger:
     associated with a specific value between 0 and 2 inclusive. The meanings of the
     values are as follows:
 
-    0: disabled, do not print to console or save to log file
-    1: enabled, print to console but do not save to log file
-    2: maximum, print to console and save to log file
+    - 0: disabled, do not print to console or save to log file
+    - 1: enabled, print to console but do not save to log file
+    - 2: maximum, print to console and save to log file
 
-    Attributes:
+    Attributes;
         - log (hidden, list): contains all log entries, each one an instance of LogEntry
         - scopes (hidde, dictionary): contains all scopes and their associated values
 
-    Methods:
+    Methods;
         - get(str, str) -> Union[List[str], str]: get entries from the log
     """
     def __init__(
@@ -68,13 +68,9 @@ class Logger:
         """Returns item(s) in the log. What entries are returned can be controlled by
         passing optional arguments.
 
-        Arguments:
-            - mode (optional, string): options are "all" and "recent".
-            - scope (optional, string): if passed, only entries with matching scope will
-            be returned
-
-        Returns: a single log entry (string), list of log entries (string array), or
-                 an empty string on a failure.
+        :param mode: Optional; 'all' or 'recent'
+        :param scope: Optional; if passed, oly entries with matching scope will be returned.
+        :return: a single log entry, list of log entries, or an empty string on a failure.
         """
         if scope is None:
             # Tuple indexing provides a succint way to determine what to return
@@ -103,10 +99,8 @@ class Logger:
     def get_time(self: object, method: str = "time") -> str:
         """Gets the current time and parses it to a human-readable format.
 
-        Arguments:
-        - method (str): the method to calculate the timestamp; either 'time' or 'date'.
-
-        Returns: a single date string in either format 'YYYY-MM-DD HH:MM:SS', or format
+        :param method: The method to calculate the timestamp; either 'time' or 'date'.
+        :return: a single date string in either format 'YYYY-MM-DD HH:MM:SS', or format
                  'YYYY-MM-DD'
         """
         if method == "time":
@@ -140,12 +134,10 @@ class Logger:
         do_not_print is passed as True, it will only save the log and will not print
         anything (unless the scope is 'NOSCOPE'; these messages are always printed).
 
-        Arguments:
-        - messages (single string): the messaage to log.
-        - scope (single string): the scope of the message (e.g. debug, error, info).
-        - do_not_print (bool): optional, False by default.
-
-        Returns: boolean success status.
+        :param message:       The messaage to log.
+        :param scope:         The scope of the message (e.g. debug, error, info).
+        :param do_not_print:  Optional; False by default.
+        :return: boolean success status.
         """
         if scope in self.__scopes or scope == "NOSCOPE":
             # Create and save the log entry
@@ -168,10 +160,6 @@ class Logger:
         in the working directory, creating the folder and file if they do not exist.
         The log files are marked with the date, so each new day, a new file will be
         created.
-
-        No arguments.
-
-        No return value.
         """
         with open(
             f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
