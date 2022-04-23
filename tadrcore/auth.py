@@ -24,7 +24,7 @@ import webbrowser
 from configparser import NoSectionError
 from praw.exceptions import MissingRequiredAttributeException
 from random import randint
-from typing import Dict, NoReturn
+from typing import Dict
 from .creds import add_refresh_token, create_credentials, get_credentials
 from .globals import Globals
 from .logger import Log
@@ -32,16 +32,13 @@ from .logger import Log
 global Globals, Log
 
 
-def check_failure(client: object, params: Dict, state: str) -> NoReturn:
+def check_failure(client: object, params: Dict, state: str) -> None:
     """Checks for an authorisation failure, either due to a state mismatch or Reddit
     throwing an error in the return parameters.
 
-    Arguments:
-    - client (object)
-    - params (dictionary)
-    - state (string)
-
-    No return value.
+    :param client:  A web client object.
+    :param params:  The parameters received by the web client.
+    :param state:   The expected state.
     """
     if state != params["state"]:
         send_message(
@@ -60,9 +57,7 @@ def check_failure(client: object, params: Dict, state: str) -> NoReturn:
 def init() -> object:
     """Initialises the Reddit instance, creating a new praw.ini if none is found.
 
-    No arguments.
-
-    Returns: praw.Reddit instance.
+    :return: praw.Reddit instance.
     """
     try:
         return login()
@@ -84,9 +79,7 @@ def login() -> object:
     """Handles the Reddit login and authorisation using credentials from praw.ini; will
     also handle initial refresh token setup if 2FA is enabled for the account.
 
-    No arguments.
-
-    Returns: praw.Reddit instance.
+    :return: praw.Reddit instance.
     """
     creds = get_credentials()
 
@@ -143,9 +136,7 @@ def receive_connection() -> object:
     """Wait for and then return a connected socket. Opens a TCP connection on port 8080,
     and waits for a single client.
 
-    No arguments.
-
-    Returns: client object.
+    :return: A client object.
     """
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -156,14 +147,11 @@ def receive_connection() -> object:
     return client
 
 
-def send_message(client: object, message: str) -> NoReturn:
+def send_message(client: object, message: str) -> None:
     """Sends a message to the client and closes the connection.
 
-    Arguments:
-    - client (object)
-    - message (string)
-
-    No return value.
+    :client:   A web client object.
+    :message:  The message to send/
     """
     client.send(f"HTTP/1.1 200 OK\r\n\r\n{message}".encode("utf-8"))
     client.close()

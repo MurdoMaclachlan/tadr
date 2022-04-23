@@ -24,29 +24,24 @@ from .logger import Log
 global Globals, Log
 
 
-def check_message(
-    message: object, messageIDs: List, Notify: object
-) -> bool:
+def check_message(message: object, message_ids: List) -> bool:
     """Check whether a given message should be replied to or not.
 
     :param message: The message to check
-    :param messageIDs: The list of messages already replied to
-    :param Notify: The desktop notification manager
-
+    :param message_ids: The list of messages already replied to
     :return: Boolean success status
     """
     # Avoid checking messages from before program start, or that have already been
     # checked
-
     if (
         (
             message.created_utc > Globals.START_TIME
-            and not message.id in messageIDs
+            and not message.id in message_ids
         )
         and message.body.split(Globals.SPLITTER)[0] in Globals.MESSAGES
         and message.author.name in Globals.AUTHORS
     ):
-        messageIDs.append(message.id)
+        message_ids.append(message.id)
 
         # Declaring these variables saves on API requests and speeds up program a lot.
         parent = message.parent()
@@ -58,7 +53,7 @@ def check_message(
 
         # Have tried re-replying; there's a problem.
         elif parent_body == Globals.REPLY:
-            Notify.Notification.new("Problematic post found.").show()
+            Log.notify("Problematic post found.")
             Log.new(f"Problematic post at: {parent.url}", "INFO")
             return False
     else:

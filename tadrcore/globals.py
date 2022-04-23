@@ -21,16 +21,16 @@ from os import environ, makedirs
 from os.path import expanduser, isdir
 from sys import platform
 from time import time
-from typing import Dict, NoReturn
+from typing import Dict
 
 global Globals, VERSION
-VERSION = "2.0.1"
+VERSION = "2.0.1.6"
 
 
 class Static:
     """Class containing all static variables and config options.
 
-    Attributes:
+    Attributes;
         - AUTHORS (list); list of users to reply to.
         - LIMIT (int); the number of messages to look back through.
         - LOG_UPDATES (boolean); whether or not to output log details to a file.
@@ -44,15 +44,15 @@ class Static:
         - VERBOSE (boolean); whether or not to send desktop notifications when replying.
         - VERSION (str); the version number of TADR.
 
-    Methods:
+    Methods;
         - define_paths(str, str) -> Dict[str, str]; defines the locations of the data
         and config folders.
     """
-    def __init__(self) -> NoReturn:
+    def __init__(self) -> None:
         self.AUTHORS = ["transcribersofreddit"]
         self.LIMIT = 10
         self.LOG_UPDATES = True
-        self.MESSAGES = ["Sorry; I can't find your transcript post on the link"]
+        self.MESSAGES = ["⛔ Sorry, I **can't find** your transcription on the post"]
         self.OS = platform
         self.PATHS = self.define_paths(expanduser("~"), self.OS)
         self.REPLY = (
@@ -69,11 +69,9 @@ class Static:
         """Detects OS and defines the appropriate save paths for the config and data.
         Exits on detecting an unspported OS. Supported OS's are: Linux, MacOS, Windows.
 
-        Arguments:
-        - home (string)
-        - os (string)
-
-        Returns: a string dict containing the newly defined save paths
+        :param home:  The path to the user's home folder.
+        :param os:    The user's operating system.
+        :return: A string dictionary containing the newly defined save paths.
         """
         os = "".join(list(os)[:3])
 

@@ -17,9 +17,6 @@
     Contact me at murdomaclachlan@duck.com
 """
 
-from gi import require_version
-require_version('Notify', '0.7')
-from gi.repository import Notify
 from time import sleep
 from .auth import init
 from .globals import Globals
@@ -29,15 +26,9 @@ from .misc import check_message
 global Globals, Log
 
 
-def tadr():
+def tadr() -> None:
+    """The main program function.
     """
-    The main program function.
-
-    No arguments.
-
-    No return value.
-    """
-    Notify.init("TADR")
     Log.new(f"Running Auto Done Replier version {Globals.VERSION}.", "NOSCOPE")
 
     Log.new("Initialising Reddit instance...", "INFO")
@@ -54,15 +45,13 @@ def tadr():
 
             # Main check, replying to message if necessary
             # The one second delay should ensure only 1 reply is ever needed
-            if check_message(message, message_ids, Notify):
+            if check_message(message, message_ids):
                 Log.new(
                     f"Replying to message at: https://www.reddit.com{message.context}",
                     "INFO"
                 )
                 if Globals.VERBOSE:
-                    Notify.Notification.new(
-                        f"Replying to message at: {message.id}"
-                    ).show()
+                    Log.notify(f"Replying to message at: {message.id}")
                 sleep(1)
                 message.reply(Globals.REPLY)
 
