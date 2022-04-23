@@ -26,7 +26,7 @@ from .misc import check_message
 global Globals, Log
 
 
-def tadr():
+def tadr() -> None:
     """
     The main program function.
 

@@ -23,7 +23,7 @@ require_version("Notify", "0.7")
 from gi.repository import Notify
 from gi.repository.GLib import GError
 from time import time
-from typing import List, NoReturn, Union
+from typing import List, Union
 from .globals import Globals
 
 global Globals
@@ -49,7 +49,7 @@ class Logger:
     def __init__(
         self: object,
         debug=0, error=2, fatal=2, info=1, warning=2
-    ) -> NoReturn:
+    ) -> None:
         self.__log = []
         self.__notify = Notify
         self.__notify.init("Clone Finder")
@@ -163,7 +163,7 @@ class Logger:
             self.new("Unknown scope passed to Logger.new()", "WARNING")
         return False
 
-    def output(self: object) -> NoReturn:
+    def output(self: object) -> None:
         """Write all log entries with scopes set to save to a log file in a data folder
         in the working directory, creating the folder and file if they do not exist.
         The log files are marked with the date, so each new day, a new file will be

@@ -18,14 +18,14 @@
 """
 
 from configparser import ConfigParser
-from typing import Dict, NoReturn
+from typing import Dict
 from .globals import Globals
 from .logger import Log
 
 global Globals, Log
 
 
-def add_refresh_token(creds: Dict, refresh_token: str) -> NoReturn:
+def add_refresh_token(creds: Dict, refresh_token: str) -> None:
     """Appends a given Reddit refresh token to praw.ini.
 
     Arguments:
@@ -60,7 +60,7 @@ def create_credentials() -> bool:
         return False
 
 
-def dump_credentials(creds: Dict) -> NoReturn:
+def dump_credentials(creds: Dict) -> None:
     """Outputs updated Reddit credentials to praw.ini.
 
     Arguments:

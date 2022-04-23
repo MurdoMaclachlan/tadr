@@ -10,6 +10,7 @@ As of this version, setuptools 57.0.0+ and PyGObject 3.42+ are now explicitly re
 
 - Moved Notify to the Logger, allowing easy catching of any errors originating from GLib. (@MurdoMaclachlan)
 - Switched to detecting u/transcribersofreddit's new failure message. (@MurdoMaclachlan)
+- Changed functions marked to NoReturn to return None instead, as per Python's type-hinting specifications.
 - Changed camelCase variable names to snake_case. (@MurdoMaclachlan)
 - Fixed alphabetical order of methods in the Logger. (@MurdoMaclachlan)
 

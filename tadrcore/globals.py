@@ -21,10 +21,10 @@ from os import environ, makedirs
 from os.path import expanduser, isdir
 from sys import platform
 from time import time
-from typing import Dict, NoReturn
+from typing import Dict
 
 global Globals, VERSION
-VERSION = "2.0.1.4"
+VERSION = "2.0.1.5"
 
 
 class Static:
@@ -48,7 +48,7 @@ class Static:
         - define_paths(str, str) -> Dict[str, str]; defines the locations of the data
         and config folders.
     """
-    def __init__(self) -> NoReturn:
+    def __init__(self) -> None:
         self.AUTHORS = ["transcribersofreddit"]
         self.LIMIT = 10
         self.LOG_UPDATES = True
