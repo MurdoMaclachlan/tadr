@@ -8,7 +8,12 @@ Requirements
 
 In order to install TADR, you will need a version of Python installed. The program was written using 3.9, but anything 3.5 onwards should work. A minimum of 3.5 is required because that is when type-hinting, which TADR uses extensively, was added.
 
-TADR also relies on a couple of python packages; configparser and PRAW. Any version of configparser will do, but for PRAW you will need 7.5.0 or over.
+TADR also relies on some python packages:
+
+- configparser, any version
+- PRAW >= 7.5.0
+- PyGObject ~= 3.42.0
+- setuptools >= 57.0.0.
 
 Installation
 -------------

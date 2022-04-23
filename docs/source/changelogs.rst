@@ -6,6 +6,9 @@ A list of changelogs for TADR, with the most recent version first. These are als
 Unreleased
 ----------
 
+2.0.1
+-----
+
 As of this version, setuptools 57.0.0+ and PyGObject 3.42+ are now explicitly required, having been implicit requirements before.
 
 - Moved Notify to the Logger, allowing easy catching of any errors originating from GLib. (@MurdoMaclachlan)
