@@ -6,6 +6,8 @@ A list of changelogs for TADR, with the most recent version first. These are als
 Unreleased
 ----------
 
+- Added system for gracefully handling kill signals, avoiding loss of unsaved log entries or stats and printing nice console output instead of a KeyboardInterrupt traceback. (@MurdoMaclachlan)
+
 2.0.1
 -----
 

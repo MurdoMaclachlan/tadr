@@ -17,7 +17,9 @@
     Contact me at murdomaclachlan@duck.com
 """
 
+import signal
 from time import sleep
+from typing import Any
 from .auth import init
 from .globals import Globals
 from .logger import Log
@@ -29,8 +31,9 @@ global Globals, Log
 def tadr() -> None:
     """The main program function.
     """
-    Log.new(f"Running Auto Done Replier version {Globals.VERSION}.", "NOSCOPE")
+    signal.signal(signal.SIGINT, signal_handler)
 
+    Log.new(f"Running Auto Done Replier version {Globals.VERSION}.", "NOSCOPE")
     Log.new("Initialising Reddit instance...", "INFO")
     reddit = init()
 
@@ -63,3 +66,15 @@ def tadr() -> None:
         Log.new(f"Finished checking messages, waiting {Globals.SLEEP} seconds.", "INFO")
 
         sleep(Globals.SLEEP)
+
+def signal_handler(sig: int, frame: Any) -> None:
+    """Gracefully exit; don't lose any as-yet unsaved log entries.
+
+    :param sig: int
+    :param frame: Any
+
+    :return: Nothing.
+    """
+    print("\r", end="\r")
+    Log.new("Received kill signal, exiting...", "INFO")
+    exit(0)
