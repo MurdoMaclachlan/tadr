@@ -7,6 +7,7 @@ Unreleased
 ----------
 
 - Added system for gracefully handling kill signals, avoiding loss of unsaved log entries or stats and printing nice console output instead of a KeyboardInterrupt traceback. (@MurdoMaclachlan)
+- Minor under-the-hood improvements. (@MurdoMaclachlan)
 
 2.0.1
 -----

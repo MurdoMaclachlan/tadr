@@ -146,11 +146,10 @@ class Logger:
             # A select few messages have no listed scope and should always be printed
             if scope == "NOSCOPE":
                 print(entry.rendered)
-                return True
             # If the scope's value is 1 or greater it should be printed
             elif self.__scopes[scope]:
                 print(entry.rendered if not do_not_print else None)
-                return True
+            return True
         else:
             self.new("Unknown scope passed to Logger.new()", "WARNING")
         return False
