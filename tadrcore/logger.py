@@ -18,10 +18,7 @@
 """
 
 from datetime import datetime
-from gi import require_version
-require_version("Notify", "0.7")
-from gi.repository import Notify
-from gi.repository.GLib import GError
+from plyer import notification
 from time import time
 from typing import List, Union
 from .globals import Globals
@@ -51,8 +48,7 @@ class Logger:
         debug=0, error=2, fatal=2, info=1, warning=2
     ) -> None:
         self.__log = []
-        self.__notify = Notify
-        self.__notify.init("Clone Finder")
+        self.__notifier = notification
         self.__scopes = {
             "DEBUG":   debug,   # information for debugging the program
             "ERROR":   error,   # errors the program can recover from
@@ -121,10 +117,7 @@ class Logger:
 
         :param message: The message to display in the notification.
         """
-        try:
-            self.__notify.Notification.new(message).show()
-        except GError:
-            pass
+        self.__notifier.notify(title="TADR",message=message)
 
     def new(
             self: object,

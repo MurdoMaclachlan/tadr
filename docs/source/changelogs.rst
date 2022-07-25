@@ -7,6 +7,8 @@ Unreleased
 ----------
 
 - Added system for gracefully handling kill signals, avoiding loss of unsaved log entries or stats and printing nice console output instead of a KeyboardInterrupt traceback. (@MurdoMaclachlan)
+- Switched from using PyGObject to plyer for notifications, as upgrading libnotify could cause issues with PyGObject. (@MurdoMaclachlan)
+- Notifications now show the name of the program as a title. (@MurdoMaclachlan)
 - Minor under-the-hood improvements. (@MurdoMaclachlan)
 
 2.0.1
