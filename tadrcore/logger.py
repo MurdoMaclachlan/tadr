@@ -43,10 +43,7 @@ class Logger:
     Methods;
         - get(str, str) -> Union[List[str], str]: get entries from the log
     """
-    def __init__(
-        self: object,
-        debug=0, error=2, fatal=2, info=1, warning=2
-    ) -> None:
+    def __init__(self: object, debug=0, error=2, fatal=2, info=1, warning=2) -> None:
         self.__is_empty = True
         self.__log = []
         self.__notifier = notification
