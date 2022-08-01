@@ -6,10 +6,17 @@ A list of changelogs for TADR, with the most recent version first. These are als
 Unreleased
 ----------
 
+**Improvements**
+
 - Added system for gracefully handling kill signals, avoiding loss of unsaved log entries or stats and printing nice console output instead of a KeyboardInterrupt traceback. (@MurdoMaclachlan)
 - Switched from using PyGObject to plyer for notifications, as upgrading libnotify could cause issues with PyGObject. (@MurdoMaclachlan)
 - Notifications now show the name of the program as a title. (@MurdoMaclachlan)
 - Minor under-the-hood improvements. (@MurdoMaclachlan)
+- Reduced memory usage by clearing the log after every update cycle. (@MurdoMaclachlan)
+
+**Bug Fixes**
+
+- Fixed empty log files being created when there are no log entries of appropriate scope to save to the log file. (@MurdoMaclachlan)
 
 2.0.1
 -----

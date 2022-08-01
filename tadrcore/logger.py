@@ -47,6 +47,7 @@ class Logger:
         self: object,
         debug=0, error=2, fatal=2, info=1, warning=2
     ) -> None:
+        self.__is_empty = True
         self.__log = []
         self.__notifier = notification
         self.__scopes = {
@@ -56,6 +57,12 @@ class Logger:
             "INFO":    info,    # general information for the user
             "WARNING": warning  # things that could cause errors later on
         }
+        self.__write_logs = False
+
+    def clean(self: object) -> None:
+        del self.__log[:]
+        self.__is_empty = True
+        self.__write_logs = False
 
     def get(
             self: object,
@@ -68,6 +75,8 @@ class Logger:
         :param scope: Optional; if passed, oly entries with matching scope will be returned.
         :return: a single log entry, list of log entries, or an empty string on a failure.
         """
+        if self.__is_empty:
+            pass
         if scope is None:
             # Tuple indexing provides a succint way to determine what to return
             return (self.__log, self.__log[len(self.__log)-1])[mode == "recent"]
@@ -87,10 +96,10 @@ class Logger:
                 for i in self.__log.reverse():
                     if i.scope == scope:
                         return self.__log[i]
-                return ""
             else:
                 self.new("Unknown mode passed to Logger.get().", "WARNING")
-                return ""
+        # Return an empty string to indicate failure if no entries were found
+        return ""
 
     def get_time(self: object, method: str = "time") -> str:
         """Gets the current time and parses it to a human-readable format.
@@ -99,12 +108,13 @@ class Logger:
         :return: a single date string in either format 'YYYY-MM-DD HH:MM:SS', or format
                  'YYYY-MM-DD'
         """
-        if method == "time":
-            return datetime.fromtimestamp(time()).strftime("%Y-%m-%d %H:%M:%S")
-        elif method == "date":
-            return datetime.fromtimestamp(time()).strftime("%Y-%m-%d")
+        if method in ["time", "date"]:
+            return datetime.fromtimestamp(time()).strftime(
+                ("%Y-%m-%d", "%Y-%m-%d %H:%M:%S")[method == "time"]
+            )
         else:
             print("ERROR: Bad method passed to Logger.get_time().")
+            return ""
 
     def notify(self: object, message: str) -> None:
         """Display a desktop notification with a given message.
@@ -134,14 +144,18 @@ class Logger:
         """
         if scope in self.__scopes or scope == "NOSCOPE":
             # Create and save the log entry
-            entry = LogEntry(message, scope, self.get_time())
+            output = (self.__scopes[scope] == 2) if scope != "NOSCOPE" else False
+            entry = LogEntry(message, output, scope, self.get_time())
             self.__log.append(entry)
+            if not self.__write_logs:
+                self.__write_logs = output
             # A select few messages have no listed scope and should always be printed
             if scope == "NOSCOPE":
                 print(entry.rendered)
             # If the scope's value is 1 or greater it should be printed
             elif self.__scopes[scope]:
                 print(entry.rendered if not do_not_print else None)
+            self.__is_empty = False
             return True
         else:
             self.new("Unknown scope passed to Logger.new()", "WARNING")
@@ -153,15 +167,14 @@ class Logger:
         The log files are marked with the date, so each new day, a new file will be
         created.
         """
-        with open(
-            f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
-        ) as log_file:
-            for line in self.__log:
-                try:
-                    if self.__scopes[line.scope] == 2:
+        if self.__write_logs:
+            with open(
+                f"{Globals.PATHS['data']}/log-{self.get_time(method='date')}.txt", "at+"
+            ) as log_file:
+                for line in self.__log:
+                    if line.output:
                         log_file.write(line.rendered + "\n")
-                except KeyError:
-                    pass
+        self.clean()
 
 
 class LogEntry:
@@ -176,7 +189,8 @@ class LogEntry:
     - rendered (str): the full rendered message that will be printed to the user or
                       saved to the log file
     """
-    def __init__(self: object, message: str, scope: str, timestamp: str):
+    def __init__(self: object, message: str, output: str, scope: str, timestamp: str):
+        self.output = output
         self.message = message
         self.scope = scope
         self.timestamp = timestamp
