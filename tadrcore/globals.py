@@ -23,7 +23,7 @@ from sys import platform
 from time import time
 
 global Globals, VERSION
-VERSION = "2.0.2.4"
+VERSION = "2.0.2.5"
 
 
 class Static:
