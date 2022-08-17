@@ -8,15 +8,21 @@ Unreleased
 
 **Improvements**
 
+- Moved Logger to an external package, smooth_logger. (@MurdoMaclachlan) Changes to the new package:
+    - Switched from using PyGObject to plyer for desktop notifications, as upgrading libnotify could cause issues with PyGObject.
+    - Desktop notifications now show the name of the program as a title.
+    - Reduced memory usage by clearing the log after every update cycle.
 - Added system for gracefully handling kill signals, avoiding loss of unsaved log entries or stats and printing nice console output instead of a KeyboardInterrupt traceback. (@MurdoMaclachlan)
-- Switched from using PyGObject to plyer for notifications, as upgrading libnotify could cause issues with PyGObject. (@MurdoMaclachlan)
-- Notifications now show the name of the program as a title. (@MurdoMaclachlan)
 - Minor under-the-hood improvements. (@MurdoMaclachlan)
-- Reduced memory usage by clearing the log after every update cycle. (@MurdoMaclachlan)
+
+**Documentation**
+
+- TADR no longer creates an unused ``~/.tadr`` directory on Unix systems, or ``APPDATA\\tadr\data`` directory on Windows. (@MurdoMaclachlan)
 
 **Bug Fixes**
 
 - Fixed empty log files being created when there are no log entries of appropriate scope to save to the log file. (@MurdoMaclachlan)
+- Fixed incorrect type hinting for ``dump_credentials``. (@MurdoMaclachlan)
 
 2.0.1
 -----

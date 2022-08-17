@@ -55,7 +55,7 @@ def create_credentials() -> bool:
         return False
 
 
-def dump_credentials(creds: Dict) -> None:
+def dump_credentials(creds: Dict) -> bool:
     """Outputs updated Reddit credentials to praw.ini.
 
     :param creds:  A dictionary containing the credentials.
@@ -63,7 +63,7 @@ def dump_credentials(creds: Dict) -> None:
     """
     Parser = ConfigParser()
     Parser["tcf"] = creds
-    with open(f"{Globals.PATHS['config']}/praw.ini", "w+") as dump_file:
+    with open(f"{Globals.PATH}/praw.ini", "w+") as dump_file:
         Parser.write(dump_file)
     return True
 
@@ -75,7 +75,7 @@ def get_credentials() -> Dict:
     """
     try:
         Parser = ConfigParser()
-        Parser.read(f"{Globals.PATHS['config']}/praw.ini")
+        Parser.read(f"{Globals.PATH}/praw.ini")
         return dict(Parser["tcf"])
     except FileNotFoundError:
         if create_credentials():

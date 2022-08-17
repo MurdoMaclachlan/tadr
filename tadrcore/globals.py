@@ -21,7 +21,6 @@ from os import environ, makedirs
 from os.path import expanduser, isdir
 from sys import platform
 from time import time
-from typing import Dict
 
 global Globals, VERSION
 VERSION = "2.0.2.4"
@@ -54,7 +53,7 @@ class Static:
         self.LOG_UPDATES = True
         self.MESSAGES = ["⛔ Sorry, I **can't find** your transcription on the post"]
         self.OS = platform
-        self.PATHS = self.define_paths(expanduser("~"), self.OS)
+        self.PATH = self.define_path(expanduser("~"), self.OS)
         self.REPLY = (
             "done -- this was an automated action; please contact me with any"
             " questions."
@@ -65,7 +64,7 @@ class Static:
         self.VERBOSE = True
         self.VERSION = VERSION
 
-    def define_paths(self, home: str, os: str) -> Dict[str, str]:
+    def define_path(self, home: str, os: str) -> str:
         """Detects OS and defines the appropriate save paths for the config and data.
         Exits on detecting an unspported OS. Supported OS's are: Linux, MacOS, Windows.
 
@@ -78,22 +77,17 @@ class Static:
         # Route for a supported operating system
         if os in ["dar", "lin", "win"]:
 
-            paths = (
-                {
-                    "config": environ["APPDATA"] + "\\tadr",
-                    "data": environ["APPDATA"] + "\\tadr\data"
-                } if os == "win" else {
-                    "config": f"{home}/.config/tadr",
-                    "data": f"{home}/.tadr/data"
-                }
+            path = (
+                environ["APPDATA"] + "\\tadr"
+                if os == "win" else
+                f"{home}/.config/tadr"
             )
 
-            # Create any missing paths/directories
-            for path in paths:
-                if not isdir(paths[path]):
-                    print(f"DEBUG: Making path: {paths[path]}")
-                    makedirs(path, exist_ok=True)
-            return paths
+            # Create any missing directories
+            if not isdir(path):
+                print(f"DEBUG: Making path: {path}")
+                makedirs(path, exist_ok=True)
+            return path
 
         # Exit if the operating system is unsupported
         else:

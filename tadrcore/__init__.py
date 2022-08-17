@@ -34,7 +34,7 @@ from .creds import get_credentials
 from .globals import Static, Globals
 
 # Logger
-from .logger import Log, LogEntry, Logger
+from .logger import Log
 
 # Main
 from .main import tadr
