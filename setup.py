@@ -23,7 +23,6 @@ setup(
     install_requires=[
         "configparser",
         "praw>=7.5.0",
-        "PyGObject~=3.42.0",
         "setuptools>=57.0.0",
         "smooth_logger"
     ],

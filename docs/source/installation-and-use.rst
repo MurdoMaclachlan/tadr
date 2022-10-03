@@ -10,9 +10,9 @@ In order to install TADR, you will need a version of Python installed. The progr
 
 TADR also relies on some python packages:
 
+- smooth_logger, any version
 - configparser, any version
 - PRAW >= 7.5.0
-- PyGObject ~= 3.42.0
 - setuptools >= 57.0.0.
 
 Installation

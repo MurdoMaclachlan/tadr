@@ -64,7 +64,7 @@ class Static:
         self.VERBOSE = True
         self.VERSION = VERSION
 
-    def define_path(self, home: str, os: str) -> str:
+    def define_path(self: object, home: str, os: str) -> str:
         """Detects OS and defines the appropriate save paths for the config and data.
         Exits on detecting an unspported OS. Supported OS's are: Linux, MacOS, Windows.
 
@@ -78,9 +78,7 @@ class Static:
         if os in ["dar", "lin", "win"]:
 
             path = (
-                environ["APPDATA"] + "\\tadr"
-                if os == "win" else
-                f"{home}/.config/tadr"
+                environ["APPDATA"] + "\\tadr" if os == "win" else f"{home}/.config/tadr"
             )
 
             # Create any missing directories
