@@ -25,8 +25,6 @@ from .globals import Globals
 from .logger import Log
 from .misc import check_message
 
-global Globals, Log
-
 
 def tadr() -> None:
     """The main program function.
@@ -47,7 +45,7 @@ def tadr() -> None:
         for message in reddit.inbox.comment_replies(limit=Globals.LIMIT):
 
             # Main check, replying to message if necessary
-            # The one second delay should ensure only 1 reply is ever needed
+            # The one-second delay should ensure only 1 reply is ever needed
             if check_message(message, message_ids):
                 Log.new(
                     f"Replying to message at: https://www.reddit.com{message.context}",
@@ -66,6 +64,7 @@ def tadr() -> None:
         Log.new(f"Finished checking messages, waiting {Globals.SLEEP} seconds.", "INFO")
 
         sleep(Globals.SLEEP)
+
 
 def signal_handler(sig: int, frame: Any) -> None:
     """Gracefully exit; don't lose any as-yet unsaved log entries.

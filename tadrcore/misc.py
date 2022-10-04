@@ -18,13 +18,12 @@
 """
 
 from typing import List
+from praw.models import Comment
 from .globals import Globals
 from .logger import Log
 
-global Globals, Log
 
-
-def check_message(message: object, message_ids: List) -> bool:
+def check_message(message: Comment, message_ids: List) -> bool:
     """Check whether a given message should be replied to or not.
 
     :param message: The message to check
@@ -36,7 +35,7 @@ def check_message(message: object, message_ids: List) -> bool:
     if (
         (
             message.created_utc > Globals.START_TIME
-            and not message.id in message_ids
+            and message.id not in message_ids
         )
         and message.body.split(Globals.SPLITTER)[0] in Globals.MESSAGES
         and message.author.name in Globals.AUTHORS

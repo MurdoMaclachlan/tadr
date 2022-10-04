@@ -23,7 +23,7 @@ from sys import platform
 from time import time
 
 global Globals, VERSION
-VERSION = "2.0.2.5"
+VERSION = "2.0.2.6"
 
 
 class Static:
@@ -32,7 +32,7 @@ class Static:
     Attributes;
         - AUTHORS (list); list of users to reply to.
         - LIMIT (int); the number of messages to look back through.
-        - LOG_UPDATES (boolean); whether or not to output log details to a file.
+        - LOG_UPDATES (boolean); whether to output log details to a file.
         - MESSAGES (list); list of phrases to reply to.
         - OS (str); the user's operating system.
         - PATHS (dictionary); the locations of the data and config folders.
@@ -40,7 +40,7 @@ class Static:
         - SLEEP (int); the number of seconds to wait between checks.
         - SPLITTER (str); the character to split messages by when searching.
         - START_TIME (int); the unix timestamp at which the program started running.
-        - VERBOSE (boolean); whether or not to send desktop notifications when replying.
+        - VERBOSE (boolean); whether to send desktop notifications when replying.
         - VERSION (str); the version number of TADR.
 
     Methods;
@@ -53,7 +53,7 @@ class Static:
         self.LOG_UPDATES = True
         self.MESSAGES = ["⛔ Sorry, I **can't find** your transcription on the post"]
         self.OS = platform
-        self.PATH = self.define_path(expanduser("~"), self.OS)
+        self.PATH = self.__define_path(expanduser("~"), self.OS)
         self.REPLY = (
             "done -- this was an automated action; please contact me with any"
             " questions."
@@ -64,9 +64,9 @@ class Static:
         self.VERBOSE = True
         self.VERSION = VERSION
 
-    def define_path(self: object, home: str, os: str) -> str:
+    def __define_path(self: object, home: str, os: str) -> str:
         """Detects OS and defines the appropriate save paths for the config and data.
-        Exits on detecting an unspported OS. Supported OS's are: Linux, MacOS, Windows.
+        Exits on detecting an unsupported OS. Supported OSes are: Linux, MacOS, Windows.
 
         :param home:  The path to the user's home folder.
         :param os:    The user's operating system.
@@ -76,7 +76,6 @@ class Static:
 
         # Route for a supported operating system
         if os in ["dar", "lin", "win"]:
-
             path = (
                 environ["APPDATA"] + "\\tadr" if os == "win" else f"{home}/.config/tadr"
             )

@@ -22,12 +22,11 @@ from typing import Dict
 from .globals import Globals
 from .logger import Log
 
-global Globals, Log
-
 
 def add_refresh_token(creds: Dict, refresh_token: str) -> None:
     """Appends a given Reddit refresh token to praw.ini.
 
+    :param creds:          The program credentials.
     :param refresh_token:  The Reddit refresh token to append.
     """
     creds["refresh_token"] = refresh_token

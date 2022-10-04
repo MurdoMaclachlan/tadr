@@ -29,10 +29,8 @@ from .creds import add_refresh_token, create_credentials, get_credentials
 from .globals import Globals
 from .logger import Log
 
-global Globals, Log
 
-
-def check_failure(client: object, params: Dict, state: str) -> None:
+def check_failure(client: socket, params: Dict, state: str) -> None:
     """Checks for an authorisation failure, either due to a state mismatch or Reddit
     throwing an error in the return parameters.
 
@@ -54,7 +52,7 @@ def check_failure(client: object, params: Dict, state: str) -> None:
         sys.exit()
 
 
-def init() -> object:
+def init() -> praw.Reddit:
     """Initialises the Reddit instance, creating a new praw.ini if none is found.
 
     :return: praw.Reddit instance.
@@ -75,7 +73,7 @@ def init() -> object:
         sys.exit()
 
 
-def login() -> object:
+def login() -> praw.Reddit:
     """Handles the Reddit login and authorisation using credentials from praw.ini; will
     also handle initial refresh token setup if 2FA is enabled for the account.
 
@@ -132,7 +130,7 @@ def login() -> object:
     return reddit
 
 
-def receive_connection() -> object:
+def receive_connection() -> socket:
     """Wait for and then return a connected socket. Opens a TCP connection on port 8080,
     and waits for a single client.
 
@@ -147,7 +145,7 @@ def receive_connection() -> object:
     return client
 
 
-def send_message(client: object, message: str) -> None:
+def send_message(client: socket, message: str) -> None:
     """Sends a message to the client and closes the connection.
 
     :client:   A web client object.
